@@ -10,6 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var TVSymbols: UITableView!
+    @IBOutlet weak var LBLStatus: UILabel!
+    @IBOutlet weak var LBLGuess: UILabel!
+    @IBOutlet weak var LBLPreviousGuess: UILabel!
+    @IBOutlet weak var LBLHint: UILabel!
+    @IBOutlet weak var BTNReset: UIButton!
+    @IBOutlet weak var BTNHint: UIButton!
+    @IBOutlet weak var BTNUndo: UIButton!   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
