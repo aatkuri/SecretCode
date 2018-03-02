@@ -44,7 +44,7 @@ class CodeWord{
         }else{
             if !isLastAttempt() {
                 _guess.append(guessSymbol)
-                _status = "Guess \(_attempts) completed: \(matchedSymbols()) correct"
+                _status = "Guess \(_attempts) completed: \(matchedSymbolsCount()) correct"
                 _OnSymbol = 0
                 _attempts += 1
             }else{
@@ -52,7 +52,7 @@ class CodeWord{
                     _guess.append(guessSymbol)
                 }
                 if correctGuess() {
-                    _status = "Guess \(_attempts) completed: \(matchedSymbols()) correct"
+                    _status = "Guess \(_attempts) completed: \(matchedSymbolsCount()) correct"
                 } else {
                     _status = "Unbroken Code – Press reset to start again."
                     
@@ -61,7 +61,7 @@ class CodeWord{
         }
     }
     
-    func matchedSymbols() -> Int {
+    func matchedSymbolsCount() -> Int {
         var correct = 0;
         for i in 0 ..< _guess.count{
             if _guess[i] == _code[i] {
@@ -87,7 +87,7 @@ class CodeWord{
     }
     
     func correctGuess() -> Bool {
-        return matchedSymbols()==_count
+        return matchedSymbolsCount()==_count
     }
     
     func reset(){
@@ -118,8 +118,7 @@ class CodeWord{
     func undoLastGuess(){
         if _guess.count != 0 {
             _guess.removeLast()
-            _OnSymbol -= 1
-            _attempts -= 1
+            _OnSymbol -= 1            
             _status = "Attempt \(_attempts): \(_guess.count) symbols guessed"
         }
     }

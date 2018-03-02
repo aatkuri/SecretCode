@@ -24,8 +24,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidLoad(){
         super.viewDidLoad()
         TVSymbols.delegate = self // our tableView will use this class for both its delegate & data source
-        TVSymbols.dataSource = self
-        LBLPreviousGuess.text = ""
+        TVSymbols.dataSource = self        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,20 +49,17 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         LBLHint.text = ""
         AppDelegate.codeWordInstance.addSymbolToGuess(guessSymbol: symbols[indexPath.row])
-        LBLGuess.text = "The Guess : \(AppDelegate.codeWordInstance.currentGuess())"
-        print(LBLGuess.text!)
-        LBLStatus.text = AppDelegate.codeWordInstance.getStatusMessage()
-        print(LBLStatus.text!)
+        LBLGuess.text = "Guess : \(AppDelegate.codeWordInstance.currentGuess())"
+        LBLStatus.text = AppDelegate.codeWordInstance.getStatusMessage()        
         if AppDelegate.codeWordInstance.correctGuess() {
             LBLHint.isEnabled = false
             BTNUndo.isEnabled = false
-            LBLHint.text = "Congrats, reset and guess new code."
+            LBLHint.text = "You Won, Click reset to play again!!!!!."
         } else {
             BTNHint.isEnabled = true
             if AppDelegate.codeWordInstance.onSymbol == 0  {
                 BTNUndo.isEnabled = false
-                LBLPreviousGuess.text = LBLPreviousGuess.text! +
-                    "\nGuess \(AppDelegate.codeWordInstance.attempts-1): " + AppDelegate.codeWordInstance.currentGuess()
+                LBLPreviousGuess.text?.append("\nGuess \(AppDelegate.codeWordInstance.attempts-1): " + AppDelegate.codeWordInstance.currentGuess())
                 AppDelegate.codeWordInstance.resetGuess()
             } else if AppDelegate.codeWordInstance.onSymbol == AppDelegate.codeWordInstance.count {
                 BTNUndo.isEnabled = false
@@ -92,7 +88,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         if AppDelegate.codeWordInstance.onSymbol == 0 {
             BTNUndo.isEnabled = false
         }
-        LBLGuess.text = "The Guess : " + AppDelegate.codeWordInstance.currentGuess()
+        LBLGuess.text = "Guess : " + AppDelegate.codeWordInstance.currentGuess()
         LBLStatus.text = AppDelegate.codeWordInstance.getStatusMessage()
     } 
 }
